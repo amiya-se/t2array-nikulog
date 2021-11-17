@@ -1,0 +1,27 @@
+<%= form_with(model: nikulog) do |form| %>
+  <% if nikulog.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(nikulog.errors.count, "error") %> prohibited this nikulog from being saved:</h2>
+
+      <ul>
+        <% nikulog.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :nikudate %>
+    <%= form.text_field :nikudate %>
+  </div>
+
+  <div class="field">
+    <%= form.label :nikumenu %>
+    <%= form.text_area :nikumenu %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

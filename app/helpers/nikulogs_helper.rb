@@ -1,0 +1,2 @@
+module NikulogsHelper
+end

@@ -1,0 +1,2 @@
+class Nikulog < ApplicationRecord
+end
