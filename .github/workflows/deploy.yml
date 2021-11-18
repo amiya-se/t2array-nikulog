@@ -16,17 +16,17 @@ jobs:
         run: echo "$SSH_KEY" > .ssh/id_rsa && chmod 600 .ssh/id_rsa
         env:
           SSH_KEY: ${{ secrets.SSH_KEY }}
-      - name: Cache yarn packages
-        uses: actions/cache@v1
-        with:
-          path: ~/.cache/yarn
-          key: ${{ runner.os }}-yarn-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
-          restore-keys:
-            ${{ runner.os }}-yarn-
-      - name: install packages
-        run: yarn install
-      - name: build
-        run: yarn build
+#       - name: Cache yarn packages
+#         uses: actions/cache@v1
+#         with:
+#           path: ~/.cache/yarn
+#           key: ${{ runner.os }}-yarn-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+#           restore-keys:
+#             ${{ runner.os }}-yarn-
+#       - name: install packages
+#         run: yarn install
+#       - name: build
+#         run: yarn build
       - name: push with rsync
         run: rsync -rlptgoD -O --delete --exclude ".git/" -e "ssh -i .ssh/id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p ${SSH_PORT}" dist/ $SSH_USER@$SSH_HOST:$DIR
         env:
